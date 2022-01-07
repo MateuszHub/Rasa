@@ -1,0 +1,94 @@
+version: "3.0"
+
+stories:
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: open hours
+  steps:
+  - intent: is_open
+  - action: open_info
+
+- story: asking menu
+  steps:
+  - intent: menu
+  - action: menu_info
+
+- story: order1
+  steps:
+  - intent: order
+    entities:
+    - food: pizza
+  - slot_was_set:
+    - food: pizza
+  - action: order_form
+  - active_loop: order_form
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - time: 12:39
+  - slot_was_set:
+    - requested_slot: date
+  - slot_was_set:
+    - date: 12.02.2022
+  - action: order_form
+  - slot_was_set:
+    - requested_slot: additional
+  - slot_was_set:
+    - additional: With tomatoes
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: select_menu
+  - action: utter_goodbye
+
+- story: order2
+  steps:
+  - intent: order
+    entities:
+    - food: lasagne
+  - slot_was_set:
+    - food: lasagne
+  - action: order_form
+  - active_loop: order_form
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - time: 22:11
+  - slot_was_set:
+    - requested_slot: date
+  - slot_was_set:
+    - date: 22.05.2031
+  - slot_was_set:
+    - requested_slot: additional
+  - slot_was_set:
+    - additional: Without ketchup
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: select_menu
+  - action: utter_goodbye

@@ -1,0 +1,87 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- order
+- order_date
+- greet
+- additional
+- is_open
+- affirm
+- goodbye
+- deny
+- menu
+- bot_challenge
+- mood_great
+- mood_unhappy
+- reset
+entities:
+- date
+- food
+- time
+slots:
+  additional:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent:
+      - additional
+  food:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: food
+  date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: date
+  time:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: time
+
+responses:
+  utter_ask_additional:
+  - text: 'Enter additional info to your order:'
+  utter_ask_date:
+  - text: When do you want to pickup your order(dd.mm.yyyy)?
+  utter_ask_time:
+  - text: What time do you want to pickup your order(hh:mm)?
+  utter_ask_food:
+  - text: What do you want to order?
+  utter_greet:
+  - text: Hey! How can i help you?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_add_additional:
+  - text: Do you have addtionales info to order?
+
+actions:
+- menu_info
+- open_info
+- select_menu
+- action_reset
+
+forms:
+  order_form:
+    required_slots:
+    - time
+    - date
+    - food
+    - additional

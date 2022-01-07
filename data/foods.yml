@@ -1,0 +1,10 @@
+version: "3.0"
+nlu:
+  - lookup: food
+    examples: |
+      - Lasagne
+      - pizza
+      - burger
+      - Hot-dog
+      - Spaghetti Carbonara
+      - Tiramisu
